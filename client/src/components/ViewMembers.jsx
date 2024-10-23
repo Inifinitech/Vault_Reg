@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import myBackground from "../images/viewbg.jpg";
+
 function ViewMembers() {
   const [members, setMembers] = useState([]);
   const [filteredMembers, setFilteredMembers] = useState([]);
@@ -13,7 +15,9 @@ function ViewMembers() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await fetch("https://vault-reg.onrender.com/homemembers");
+        const response = await fetch(
+          "https://vault-reg.onrender.com/homemembers"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch members");
         }
@@ -90,44 +94,74 @@ function ViewMembers() {
   const deleteMember = async (memberId) => {
     console.log(`Attempting to delete member with ID: ${memberId}`); // Debugging log
 
-    const confirmDelete = window.confirm("Are you sure you want to delete this member?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this member?"
+    );
     if (!confirmDelete) return;
 
     try {
-        const response = await fetch(`https://vault-reg.onrender.com/delete/${memberId}`, {
-            method: "DELETE",
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to delete member");
+      const response = await fetch(
+        `https://vault-reg.onrender.com/delete/${memberId}`,
+        {
+          method: "DELETE",
         }
+      );
 
-        alert("Member deleted successfully!");
-        setMembers((prevMembers) =>
-            prevMembers.filter((member) => member.id !== memberId)
-        );
-        setFilteredMembers((prevFilteredMembers) =>
-            prevFilteredMembers.filter((member) => member.id !== memberId)
-        );
+      if (!response.ok) {
+        throw new Error("Failed to delete member");
+      }
+
+      alert("Member deleted successfully!");
+      setMembers((prevMembers) =>
+        prevMembers.filter((member) => member.id !== memberId)
+      );
+      setFilteredMembers((prevFilteredMembers) =>
+        prevFilteredMembers.filter((member) => member.id !== memberId)
+      );
     } catch (error) {
-        setError("Failed to delete member: " + error.message);
+      setError("Failed to delete member: " + error.message);
     }
-};
+  };
 
-    const handleGoBack = () => {
-      window.history.back();
-    };
-
+  const handleGoBack = () => {
+    window.history.back();
+  };
 
   return (
-    <div style={{ minHeight: "100vh", padding: "20px", textAlign: "center", backgroundImage: "url('/image/viewbg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
-          <button onClick={handleGoBack} style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                Back
-            </button>
-      <h1 style={{ fontSize: "2rem", fontWeight: "bold", color: "#ff7f00", marginBottom: "24px" }}>View Members</h1>
+    <div
+      style={{
+        minHeight: "100vh",
+        padding: "20px",
+        textAlign: "center",
+        backgroundImage: `url(${myBackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <button
+        onClick={handleGoBack}
+        style={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}
+      >
+        Back
+      </button>
+      <h1
+        style={{
+          fontSize: "2rem",
+          fontWeight: "bold",
+          color: "#ff7f00",
+          marginBottom: "24px",
+        }}
+      >
+        View Members
+      </h1>
 
       <div style={{ marginBottom: "16px" }}>
-        <label htmlFor="searchField" style={{ marginRight: "8px", fontSize: "1.125rem" }}>Search by:</label>
+        <label
+          htmlFor="searchField"
+          style={{ marginRight: "8px", fontSize: "1.125rem" }}
+        >
+          Search by:
+        </label>
         <select
           id="searchField"
           value={searchField}
@@ -175,7 +209,14 @@ function ViewMembers() {
       ) : error ? (
         <p style={{ color: "red" }}>{error}</p>
       ) : filteredMembers.length > 0 ? (
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "20px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "20px",
+          }}
+        >
           {filteredMembers.map((member) => {
             const memberName = `${member.first_name} ${member.last_name}`;
             return (
@@ -192,7 +233,15 @@ function ViewMembers() {
                   padding: "20px",
                 }}
               >
-                <h3 style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px" }}>{memberName}</h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {memberName}
+                </h3>
                 <p>Firstname: {member.first_name}</p>
                 <p>Lastname: {member.last_name}</p>
                 <p>DOB: {member.dob}</p>
@@ -213,7 +262,9 @@ function ViewMembers() {
                     width: "100%",
                   }}
                 >
-                  {attendanceMarked[memberName] ? "Attendance Marked" : "Mark Attendance"}
+                  {attendanceMarked[memberName]
+                    ? "Attendance Marked"
+                    : "Mark Attendance"}
                 </button>
                 <button
                   onClick={() => deleteMember(member.id)}

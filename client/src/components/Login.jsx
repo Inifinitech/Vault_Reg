@@ -51,19 +51,19 @@ const Login = ({ isOpen, onClose }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)', // Dark overlay for background
-            zIndex: 9999, // Ensure modal is on top
-            transition: 'opacity 0.3s ease-in-out', // Smooth fade effect
+            backgroundColor: 'rgba(0, 0, 0, 0.7)', 
+            zIndex: 9999, 
+            transition: 'opacity 0.3s ease-in-out', 
             opacity: isOpen ? 1 : 0,
         }}>
             <div style={{
                 backgroundColor: 'white',
                 borderRadius: '0.5rem',
                 padding: '2rem',
-                boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.2)', // Improved shadow for depth
+                boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.2)', 
                 maxWidth: '400px',
                 width: '100%',
-                textAlign: 'center', // Center text
+                textAlign: 'center', 
             }}>
                 <h2 style={{
                     fontSize: '1.5rem',
