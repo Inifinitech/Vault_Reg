@@ -115,7 +115,7 @@ function AttendanceReport() {
   useEffect(() => {
     const fetchAttendanceData = async () => {
       try {
-        const response = await fetch('https://vault-reg.onrender.com/reports');
+        const response = await fetch("http://127.0.0.1:5555/reports");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

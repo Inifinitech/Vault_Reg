@@ -13,7 +13,8 @@ import os
 import logging
 
 app=Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] ="postgresql://vault_members_db_user:PhpQavOMjsKPdzFljblMZulzdUJ5P2fU@dpg-csb5rc56l47c73f8f07g-a.oregon-postgres.render.com/vault_members_db"
+# app.config["SQLALCHEMY_DATABASE_URI"] ="postgresql://vault_members_db_user:PhpQavOMjsKPdzFljblMZulzdUJ5P2fU@dpg-csb5rc56l47c73f8f07g-a.oregon-postgres.render.com/vault_members_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vault_members.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True 
 
